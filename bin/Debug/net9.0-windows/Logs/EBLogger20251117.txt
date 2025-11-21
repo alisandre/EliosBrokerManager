@@ -1,0 +1,13 @@
+2025-11-17 16:21:16.783 +01:00 [ERR] RefreshJibriaEliosQueue: The configuration section cannot contain a CDATA or text element. (E:\Alessandra\Progetti\EliosBrokerManager\bin\Debug\net9.0-windows\EliosBrokerManager.dll.config line 5)
+2025-11-17 16:21:52.287 +01:00 [ERR] RefreshJibriaEliosQueue: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure()' to the 'UseMySql' call.
+2025-11-17 16:22:19.689 +01:00 [ERR] RefreshJibriaEliosQueue: An exception has been raised that is likely due to a transient failure. Consider enabling transient error resiliency by adding 'EnableRetryOnFailure()' to the 'UseMySql' call.
+2025-11-17 16:29:44.652 +01:00 [ERR] RefreshJibriaEliosQueue: Dynamic SQL Error
+SQL error code = -204
+Table unknown
+ELIOS_QUEUE
+At line 2, column 20
+2025-11-17 16:29:55.814 +01:00 [ERR] RefreshJibriaEliosQueue: Dynamic SQL Error
+SQL error code = -204
+Table unknown
+ELIOS_QUEUE
+At line 2, column 20
