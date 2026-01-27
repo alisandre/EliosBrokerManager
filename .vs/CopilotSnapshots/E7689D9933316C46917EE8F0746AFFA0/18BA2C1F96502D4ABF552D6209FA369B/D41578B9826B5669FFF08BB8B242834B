@@ -1,0 +1,189 @@
+﻿# EliosBrokerManager
+
+Servizio Windows .NET per la sincronizzazione bidirezionale tra il sistema Jibria e il sistema PACS Elios.
+
+## 📋 Descrizione
+
+EliosBrokerManager è un servizio Windows sviluppato in .NET 9 che funge da broker tra due sistemi:
+- **Jibria**: Sistema gestionale esterno
+- **Elios PACS**: Sistema di archiviazione e comunicazione di immagini medicali
+
+Il servizio esegue un polling continuo per sincronizzare i dati degli esami radiologici, gestendo l'intero ciclo di vita delle richieste di esame.
+
+## 🔄 Funzionalità Principali
+
+Il servizio esegue tre operazioni principali ogni 30 secondi:
+
+### 1. Invio Richieste da Jibria a Elios
+- Legge dalla coda di Jibria gli esami in stato `IN_ATTESA`
+- Crea o aggiorna nel database Elios:
+  - Anagrafica paziente
+  - Tipologia esame
+  - Accettazione
+  - Dettaglio accettazione
+- Marca gli elementi come `INVIATO` dopo l'invio riuscito
+
+### 2. Ricezione Feedback dal PACS
+- Recupera gli aggiornamenti di stato dal sistema PACS Elios
+- Aggiorna lo stato PACS nella coda Jibria
+- Gestisce gli stati finali:
+  - Stato `110`: esame completato → marcato come `ESEGUITO`
+  - Altri stati: esame in errore → marcato come `IN_ERRORE`
+
+### 3. Notifica Completamento a Elios
+- Invia il feedback finale per gli esami completati (stato PACS = `110`)
+- Aggiorna lo stato a `COMPLETATO` nella coda Jibria
+- Imposta lo stato esterno a `120` nel database Elios
+
+## 🏗️ Architettura
+
+### Componenti Principali
+
+- **QueueWorker**: Background service che esegue il polling continuo
+- **JibriaQueueProvider**: Gestisce le operazioni sulla coda Jibria
+- **EliosBrokerProvider**: Gestisce le operazioni sul database Elios PACS
+
+### Ciclo di Vita degli Stati
+
+### Database
+
+Il servizio interagisce con due database distinti:
+- **JibriaDB**: Contiene la tabella `EliosQueue` con gli elementi da sincronizzare
+- **EliosDB**: Contiene le tabelle del sistema PACS (Paziente, Accettazione, AccettazioneDett, TabEsame)
+
+## ⚙️ Configurazione
+
+La configurazione del servizio è gestita tramite il file `appsettings.json`:
+
+## 🚀 Installazione come Servizio Windows
+
+1. Compilare il progetto in modalità Release
+2. Installare il servizio utilizzando PowerShell con privilegi di amministratore:
+3. Configurare il servizio per l'avvio automatico (opzionale)
+
+## 📊 Logging
+
+Il servizio registra eventi nel registro eventi di Windows utilizzando `EventLog`. Gli eventi principali registrati includono:
+- Avvio/arresto del servizio
+- Operazioni di sincronizzazione
+- Errori durante l'elaborazione
+
+## 🛠️ Tecnologie Utilizzate
+
+- **.NET 9.0**
+- **C# 13.0**
+- **Entity Framework Core** (per l'accesso ai database)
+- **Microsoft.Extensions.Hosting** (per il servizio Windows)
+- **Microsoft.Extensions.Logging** (per il logging)
+
+## 📝 Note Tecniche
+
+- **Intervallo di polling**: 30 secondi
+- **Pausa tra operazioni**: 1 secondo tra batch di invio
+- **Finestra temporale feedback**: Ultimi 1 giorno
+- **Gestione transazioni**: Tutte le operazioni sul database utilizzano transazioni per garantire l'integrità dei dati
+
+## 🔒 Requisiti
+
+- Windows Server 2016 o superiore
+- .NET 9.0 Runtime
+- Accesso ai database Jibria e Elios PACS
+- Permessi per l'esecuzione come servizio Windows
+
+## 📄 Licenza
+
+[Specificare la licenza del progetto]
+
+## 👥 Autori
+
+[Specificare gli autori del progetto]
+
+## 🔄 Stati dei Sistemi
+
+### Stati Jibria (`StatoInvio` nella tabella `EliosQueue`)
+
+Il sistema Jibria gestisce gli stati di sincronizzazione attraverso il campo `StatoInvio`:
+
+| Stato | Valore | Descrizione | Transizione |
+|-------|--------|-------------|-------------|
+| **IN_ATTESA** | `IN_ATTESA` | Richiesta di esame creata e pronta per l'invio a Elios PACS | Stato iniziale |
+| **INVIATO** | `INVIATO` | Richiesta inviata con successo al sistema Elios. Dati paziente, esame e accettazione creati nel database PACS | Da `IN_ATTESA` dopo inserimento riuscito in Elios |
+| **ESEGUITO** | `ESEGUITO` | Esame completato con successo nel sistema PACS. Il PACS ha confermato l'esecuzione (stato `110`) | Da `INVIATO` quando `StatoPacs = 110` |
+| **IN_ERRORE** | `IN_ERRORE` | Errore durante l'elaborazione dell'esame nel sistema PACS | Da `INVIATO` quando `StatoPacs ≠ 110` |
+| **COMPLETATO** | `COMPLETATO` | Ciclo completato. Il feedback finale è stato inviato al sistema Elios | Da `ESEGUITO` dopo notifica di completamento a Elios |
+
+#### Campi Aggiuntivi nella Coda Jibria
+
+- **`StatoPacs`**: Stato ricevuto dal sistema PACS Elios (es. `110` = completato)
+- **`ErrorePacs`**: Messaggio di errore dal PACS (se presente)
+- **`DataInvio`**: Timestamp dell'invio al sistema Elios
+- **`DataUltAggPacs`**: Timestamp dell'ultimo aggiornamento dal PACS
+- **`DataInserimento`**: Timestamp di creazione della richiesta
+
+### Stati Elios PACS
+
+Il sistema Elios PACS utilizza stati numerici separati per l'accettazione e il dettaglio accettazione:
+
+#### Stati Esterni (`EsternoStato`)
+
+Stati gestiti dal sistema esterno (Jibria) e sincronizzati con Elios:
+
+| Livello | Stato | Descrizione | Quando viene impostato |
+|---------|-------|-------------|------------------------|
+| **Accettazione** | `10` | Accettazione ricevuta dal sistema esterno | Creazione/aggiornamento iniziale dell'accettazione |
+| **Dettaglio Accettazione** | `70` | Dettaglio esame ricevuto | Creazione/aggiornamento del dettaglio esame |
+| **Completamento** | `120` | Esame completato e confermato | Dopo ricezione feedback `StatoPacs = 110` da Jibria |
+
+#### Stati Interni PACS (`EliosStato`)
+
+Stati gestiti internamente dal sistema PACS Elios:
+
+| Stato | Descrizione | Significato |
+|-------|-------------|-------------|
+| `110` | **Esame Completato** | L'esame è stato eseguito con successo e le immagini sono disponibili |
+| Altri valori | **Esami in elaborazione o in errore** | L'esame è ancora in corso, in attesa, o ha riscontrato problemi |
+
+#### Tabelle Elios PACS
+
+**Tabella `Accettazione`:**
+- `EsternoStato`: Stato della sincronizzazione con il sistema esterno
+- `EsternoStatoData`: Data/ora dell'ultimo aggiornamento di stato esterno
+- `EliosStato`: Stato interno del PACS (gestito dal sistema PACS)
+- `EliosStatoData`: Data/ora dell'ultimo aggiornamento di stato PACS
+
+**Tabella `AccettazioneDett`:**
+- `EsternoStato`: Stato del dettaglio esame con il sistema esterno
+- `EsternoStatoData`: Data/ora dell'ultimo aggiornamento
+- `EliosStato`: Stato interno del dettaglio esame (es. `110` per completato)
+- `EliosStatoData`: Data/ora dell'ultimo aggiornamento PACS
+- `EliosNote`: Eventuali note o messaggi di errore dal PACS
+
+## 🔀 Flusso Completo di Sincronizzazione
+
+### Fase 1: Invio Richiesta (Jibria → Elios)
+
+1. **Creazione Richiesta in Jibria:**
+   - L'operatore crea una nuova richiesta di esame in Jibria. 
+   - Il sistema imposta lo stato `IN_ATTESA` e popola i dati necessari.
+   - Viene registrata la `DataInserimento`.
+
+2. **Polling del Servizio EliosBrokerManager:**
+   - Ogni 30 secondi, il servizio verifica la presenza di nuove richieste in stato `IN_ATTESA` nella coda Jibria.
+   - Viene eseguito un batch di massimo 100 elementi per volta.
+
+### Fase 2: Elaborazione PACS ed Aggiornamento Stato
+
+1. **Elaborazione in PACS:**
+   - Il sistema PACS elabora la richiesta ricevuta e completa l'esame.
+
+2. **Invio Feedback da PACS a Jibria:**
+   - Il PACS invia aggiornamenti di stato al sistema Jibria.
+   - Il servizio EliosBrokerManager recupera gli aggiornamenti durante il polling.
+
+3. **Aggiornamento Stato in Jibria:**
+   - Il servizio aggiorna lo stato della richiesta nella coda Jibria in base al feedback ricevuto dal PACS.
+   - Vengono gestiti gli stati finali (`ESEGUITO`, `IN_ERRORE`) e registrati i timestamp corrispondenti.
+
+### Fase 3: Notifica Completamento (Jibria → Elios)
+
+## 📊 Diagramma di Stato Completo

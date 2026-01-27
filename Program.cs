@@ -2,25 +2,58 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging.Configuration;
-using Microsoft.Extensions.Logging.EventLog;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
-
-HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
-
-builder.Services.AddWindowsService(options =>
+try
 {
-    options.ServiceName = ".NET EliosBrokerService";
-});
+    // Crea una configurazione preliminare per inizializzare Serilog
+    var configuration = new ConfigurationBuilder()
+        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+        .Build();
 
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+    // Inizializza Serilog con la configurazione da appsettings.json
+    Log.Logger = new LoggerConfiguration()
+        .ReadFrom
+        .Configuration(configuration)
+        .CreateLogger();
 
-LoggerProviderOptions.RegisterProviderOptions<EventLogSettings, EventLogLoggerProvider>(builder.Services);
+    // Inizializza anche EBLogger
+    //EBLogger.Init(configuration);
 
-builder.Services.AddHostedService<QueueWorker>();
+    Log.Information("=== Avvio EliosBrokerService ===");
+    Log.Information("Directory applicazione: {BaseDirectory}", AppDomain.CurrentDomain.BaseDirectory);
 
-builder.Logging.AddConfiguration();
+    HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
-IHost host = builder.Build();
+    builder.Services.AddWindowsService(options =>
+    {
+        options.ServiceName = ".NET EliosBrokerService";
+    });
 
-host.Run();
+    builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
+    // Rimuovi i logger di default e usa solo Serilog
+    builder.Logging.ClearProviders();
+    builder.Services.AddSerilog(Log.Logger, dispose: true);
+
+    builder.Services.AddHostedService<QueueWorker>();
+
+    IHost host = builder.Build();
+
+    Log.Information("Host creato con successo, avvio servizio...");
+
+    await host.RunAsync();
+
+    Log.Information("=== Servizio arrestato normalmente ===");
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Errore fatale durante l'avvio del servizio");    
+    throw;
+}
+finally
+{
+    Log.CloseAndFlush();    
+}

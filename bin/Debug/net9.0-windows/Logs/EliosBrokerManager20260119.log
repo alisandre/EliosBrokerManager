@@ -1,0 +1,28 @@
+2026-01-19 10:50:42.773 +01:00 [INF] [] === Avvio EliosBrokerService ===
+2026-01-19 10:50:42.812 +01:00 [INF] [] Directory applicazione: E:\Alessandra\Progetti\EliosBrokerManager\bin\Debug\net9.0-windows\
+2026-01-19 10:50:43.834 +01:00 [INF] [] Host creato con successo, avvio servizio...
+2026-01-19 10:50:43.844 +01:00 [INF] [EliosBrokerService.QueueWorker] QueueWorker creato, intervallo: 30s
+2026-01-19 10:50:44.050 +01:00 [INF] [EliosBrokerService.QueueWorker] QueueWorker avviato, intervallo: 30s
+2026-01-19 10:50:44.051 +01:00 [INF] [Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+2026-01-19 10:50:44.051 +01:00 [INF] [Microsoft.Hosting.Lifetime] Hosting environment: Production
+2026-01-19 10:50:44.051 +01:00 [INF] [Microsoft.Hosting.Lifetime] Content root path: E:\Alessandra\Progetti\EliosBrokerManager\bin\Debug\net9.0-windows
+2026-01-19 11:15:45.872 +01:00 [INF] [] === Avvio EliosBrokerService ===
+2026-01-19 11:15:45.905 +01:00 [INF] [] Directory applicazione: E:\Alessandra\Progetti\EliosBrokerManager\bin\Debug\net9.0-windows\
+2026-01-19 11:15:46.790 +01:00 [INF] [] Host creato con successo, avvio servizio...
+2026-01-19 11:15:46.800 +01:00 [INF] [EliosBrokerService.QueueWorker] QueueWorker creato, intervallo: 30s
+2026-01-19 11:15:47.190 +01:00 [INF] [EliosBrokerService.QueueWorker] QueueWorker avviato, intervallo: 30s
+2026-01-19 11:15:47.190 +01:00 [INF] [Microsoft.Hosting.Lifetime] Application started. Press Ctrl+C to shut down.
+2026-01-19 11:15:47.190 +01:00 [INF] [Microsoft.Hosting.Lifetime] Hosting environment: Production
+2026-01-19 11:15:47.190 +01:00 [INF] [Microsoft.Hosting.Lifetime] Content root path: E:\Alessandra\Progetti\EliosBrokerManager\bin\Debug\net9.0-windows
+2026-01-19 11:15:48.494 +01:00 [INF] [EliosBrokerService.QueueWorker] Trovati 0 elementi da inviare a Elios
+2026-01-19 11:15:48.494 +01:00 [INF] [EliosBrokerService.QueueWorker] FASE 1 completata: 0 inviati, 0 falliti
+2026-01-19 11:15:50.144 +01:00 [INF] [EliosBrokerService.QueueWorker] Trovati 0 feedback dal PACS
+2026-01-19 11:15:50.144 +01:00 [INF] [EliosBrokerService.QueueWorker] FASE 2 completata: 0 completati, 0 con errori
+2026-01-19 11:15:51.172 +01:00 [INF] [EliosBrokerService.QueueWorker] Trovati 0 feedback da inviare a Jibria
+2026-01-19 11:15:51.172 +01:00 [INF] [EliosBrokerService.QueueWorker] FASE 3 completata: 0 completati, 0 falliti
+2026-01-19 11:16:21.189 +01:00 [INF] [EliosBrokerService.QueueWorker] Trovati 0 elementi da inviare a Elios
+2026-01-19 11:16:21.189 +01:00 [INF] [EliosBrokerService.QueueWorker] FASE 1 completata: 0 inviati, 0 falliti
+2026-01-19 11:16:22.201 +01:00 [INF] [EliosBrokerService.QueueWorker] Trovati 0 feedback dal PACS
+2026-01-19 11:16:22.201 +01:00 [INF] [EliosBrokerService.QueueWorker] FASE 2 completata: 0 completati, 0 con errori
+2026-01-19 11:16:23.208 +01:00 [INF] [EliosBrokerService.QueueWorker] Trovati 0 feedback da inviare a Jibria
+2026-01-19 11:16:23.208 +01:00 [INF] [EliosBrokerService.QueueWorker] FASE 3 completata: 0 completati, 0 falliti

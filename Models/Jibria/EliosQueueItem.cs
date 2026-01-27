@@ -21,7 +21,7 @@ namespace EliosBrokerManager.Models.Jibria
         public string IdAccettazione { get; set; } = null!;
 
         [Column("DATA_ACCETTAZIONE")]
-        public DateTime? DataAccettazione { get; set; }
+        public DateTime DataAccettazione { get; set; }
 
         [Column("ID_PAZIENTE")]
         public int IdPaziente { get; set; }

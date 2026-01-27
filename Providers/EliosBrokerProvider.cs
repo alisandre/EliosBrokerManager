@@ -55,6 +55,11 @@ namespace EliosBrokerManager.Providers
                 paz.TipoCf = "CFI";
                 paz.CodFisc = eliosQueueItem.CodiceFiscale;
                 paz.DataNascita = eliosQueueItem.DataNascita;
+                paz.Email = string.Empty;
+                paz.IstatComuneNas = string.Empty;
+                paz.IstatComuneRes = string.Empty;
+                paz.Privacy = DateTime.Now;
+                paz.Sesso = string.Empty;
 
                 if (!patientExists) dbContext.Paziente.Add(paz);
 
@@ -66,7 +71,7 @@ namespace EliosBrokerManager.Providers
 
                 TabEsame esame;
 
-                if (esameExists)
+                if (esameExists) 
                 {
                     esame = dbContext.TabEsame.FirstOrDefault(a => a.IdEsameEsterno == eliosQueueItem.CodiceEsame);
                 }
@@ -89,18 +94,23 @@ namespace EliosBrokerManager.Providers
 
                 Accettazione acc;
 
-                if (accettazioneExists)
-                {
-                    acc = dbContext.Accettazione.FirstOrDefault(a => a.IdAccEsterno == eliosQueueItem.IdAccettazione);
-                }
-                else
-                {
-                    acc = new Accettazione();
-                    acc.InsData = DateTime.Now;
-                }
+                //if (accettazioneExists)
+                //{
+                //    acc = dbContext.Accettazione.FirstOrDefault(a => a.IdAccEsterno == eliosQueueItem.IdAccettazione);
+                //}
+                //else
+                //{
+                //    acc = new Accettazione();
+                //    acc.InsData = DateTime.Now;
+                //}
 
+                if (accettazioneExists) throw new Exception("Esame già esistente.");
+
+                acc = new Accettazione();
+                acc.InsData = DateTime.Now;
                 acc.IdPazienteBroker = paz.IdPazienteBroker;
                 acc.IdAccEsterno = eliosQueueItem.IdAccettazione;
+                acc.FlgMod = 1;
                 acc.DataAcc = eliosQueueItem.DataAccettazione;
                 acc.EsternoStato = 10; //-->acc.EliosStato = 20; // Stato "Inviato"
                 acc.EsternoStatoData = DateTime.Now;
@@ -132,11 +142,21 @@ namespace EliosBrokerManager.Providers
                 accDett.IdEsameBroker = esame.IdEsameBroker;
                 accDett.AccessionNumber = eliosQueueItem.IdAccettazione;
                 accDett.EsternoStato = 70; //-->acc.EliosStato = 80; // Stato "Inviato"             
+                accDett.DataPrenotazione = eliosQueueItem.DataAccettazione;
                 accDett.EsternoStatoData = DateTime.Now;
+                accDett.FlgInvioPortale = 0;    
 
                 if (!accettazioneDettExists) dbContext.AccettazioneDett.Add(accDett);
 
                 dbContext.SaveChanges();
+
+                _logger.LogDebug("Paziente salvato - IdPazienteBroker: {Id}, CF: {CF}", paz.IdPazienteBroker, paz.CodFisc);
+
+                // Verifica che l'ID sia stato generato
+                if (paz.IdPazienteBroker == 0)
+                {
+                    throw new Exception("IdPazienteBroker non generato correttamente");
+                }
 
                 dbContext.Database.CommitTransaction();
 
@@ -144,6 +164,18 @@ namespace EliosBrokerManager.Providers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "InsertJibriaQueueItem - Errore durante l'inserimento. IdAccettazione: {IdAccettazione}, CF: {CF}, CodiceEsame: {CodiceEsame}",
+                eliosQueueItem.IdAccettazione,
+                eliosQueueItem.CodiceFiscale,
+                eliosQueueItem.CodiceEsame);
+
+                // Log dell'inner exception per dettagli specifici
+                var innerEx = ex.InnerException;
+                while (innerEx != null)
+                {
+                    _logger.LogError("Inner Exception: {Message}", innerEx.Message);
+                    innerEx = innerEx.InnerException;
+                }
 
                 dbContext.Database.RollbackTransaction();
 
@@ -249,5 +281,6 @@ namespace EliosBrokerManager.Providers
             }
 
         }
+    
     }
 }

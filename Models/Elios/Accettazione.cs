@@ -15,19 +15,33 @@ namespace EliosBrokerManager.Models.Elios
 
         [Column("id_acc_esterno")]
         [StringLength(30)]
-        public string? IdAccEsterno { get; set; }
+        public string IdAccEsterno { get; set; }
 
         [Column("id_paziente_broker")]
-        public int? IdPazienteBroker { get; set; }
+        public int IdPazienteBroker { get; set; }
 
         [Column("id_uo")]
-        public byte? IdUo { get; set; } // TINYINT
+        public byte IdUo { get; set; } // TINYINT
 
         [Column("data_acc")]
-        public DateTime? DataAcc { get; set; }
+        public DateTime DataAcc { get; set; }
 
         [Column("flg_mod")]
-        public byte? FlgMod { get; set; }
+        public byte FlgMod { get; set; }
+
+        [Column("data_imp")]
+        public DateTime? DataImp { get; set; }
+
+        [Column("num_imp_1")]
+        [StringLength(5)]
+        public string NumImp1 { get; set; }
+
+        [Column("num_imp_2")]
+        [StringLength(10)]
+        public string NumImp2 { get; set; }
+        
+        [Column("cod_priorita")]
+        public char CodPriorita { get; set; }
 
         [Column("quesito_diagnostico")]
         [StringLength(255)]
@@ -59,10 +73,10 @@ namespace EliosBrokerManager.Models.Elios
         public string? EsternoNote { get; set; }
 
         [Column("esterno_stato")]
-        public byte? EsternoStato { get; set; }
+        public byte EsternoStato { get; set; }
 
         [Column("esterno_stato_data")]
-        public DateTime? EsternoStatoData { get; set; }
+        public DateTime EsternoStatoData { get; set; }
 
         [Column("ins_data")]
         public DateTime? InsData { get; set; } = DateTime.UtcNow;

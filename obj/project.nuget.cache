@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "daOwHC/G1sk=",
+  "dgSpecHash": "9m5CMeVK1vI=",
   "success": true,
   "projectFilePath": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\EliosBrokerManager.csproj",
   "expectedPackageFiles": [
@@ -31,6 +31,7 @@
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\microsoft.extensions.configuration.usersecrets\\10.0.0\\microsoft.extensions.configuration.usersecrets.10.0.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\10.0.0\\microsoft.extensions.dependencyinjection.10.0.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.0\\microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
+    "C:\\Users\\aless.HP-CU\\.nuget\\packages\\microsoft.extensions.dependencymodel\\10.0.0\\microsoft.extensions.dependencymodel.10.0.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\microsoft.extensions.diagnostics\\10.0.0\\microsoft.extensions.diagnostics.10.0.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\10.0.0\\microsoft.extensions.diagnostics.abstractions.10.0.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\10.0.0\\microsoft.extensions.fileproviders.abstractions.10.0.0.nupkg.sha512",
@@ -60,6 +61,11 @@
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\runtime.win-x64.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x64.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\runtime.win-x86.runtime.native.system.data.sqlclient.sni\\4.4.0\\runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\serilog\\4.3.0\\serilog.4.3.0.nupkg.sha512",
+    "C:\\Users\\aless.HP-CU\\.nuget\\packages\\serilog.extensions.hosting\\10.0.0\\serilog.extensions.hosting.10.0.0.nupkg.sha512",
+    "C:\\Users\\aless.HP-CU\\.nuget\\packages\\serilog.extensions.logging\\10.0.0\\serilog.extensions.logging.10.0.0.nupkg.sha512",
+    "C:\\Users\\aless.HP-CU\\.nuget\\packages\\serilog.settings.configuration\\10.0.0\\serilog.settings.configuration.10.0.0.nupkg.sha512",
+    "C:\\Users\\aless.HP-CU\\.nuget\\packages\\serilog.sinks.console\\6.1.1\\serilog.sinks.console.6.1.1.nupkg.sha512",
+    "C:\\Users\\aless.HP-CU\\.nuget\\packages\\serilog.sinks.eventlog\\4.0.0\\serilog.sinks.eventlog.4.0.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\serilog.sinks.file\\7.0.0\\serilog.sinks.file.7.0.0.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\system.buffers\\4.6.1\\system.buffers.4.6.1.nupkg.sha512",
     "C:\\Users\\aless.HP-CU\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
@@ -89,7 +95,7 @@
       "filePath": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\EliosBrokerManager.csproj",
       "libraryId": "EntityFramework",
       "targetGraphs": [
-        "net9.0-windows7.0"
+        "net9.0-windows"
       ]
     },
     {
@@ -101,7 +107,7 @@
       "filePath": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\EliosBrokerManager.csproj",
       "libraryId": "EntityFramework.it",
       "targetGraphs": [
-        "net9.0-windows7.0"
+        "net9.0-windows"
       ]
     }
   ]

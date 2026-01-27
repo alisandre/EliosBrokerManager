@@ -34,18 +34,18 @@ namespace EliosBrokerManager.Models.Elios
 
         [Column("sesso")]
         [StringLength(1)]
-        public string? Sesso { get; set; }
+        public string Sesso { get; set; }
 
         [Column("data_nascita")]
         public DateTime? DataNascita { get; set; }
 
         [Column("istat_comune_nas")]
         [StringLength(6)]
-        public string? IstatComuneNas { get; set; }
+        public string IstatComuneNas { get; set; }
 
         [Column("istat_comune_res")]
         [StringLength(6)]
-        public string? IstatComuneRes { get; set; }
+        public string IstatComuneRes { get; set; }
 
         [Column("indirizzo")]
         [StringLength(150)]
@@ -68,7 +68,7 @@ namespace EliosBrokerManager.Models.Elios
         public string? Email { get; set; }
 
         [Column("privacy")]
-        public DateTime? Privacy { get; set; }
+        public DateTime Privacy { get; set; }
 
         [Column("pwd_web")]
         [StringLength(10)]
