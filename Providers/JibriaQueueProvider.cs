@@ -34,6 +34,15 @@ namespace EliosBrokerManager.Providers
         
         public List<EliosQueueItem> GetJibriaEliosQueueToSend()
         {
+            var queueItems = dbContext.EliosQueue.Where(qi => qi.StatoInvio.ToUpper() == STATUS_DA_INVIARE).ToList();
+            foreach (var item in queueItems)
+            {
+                var imp = dbContext.Impegnative.Where(i => i.CodiceImpegnativa.ToString() == item.IdAccettazione);
+                item.NumeroImpegnativa = imp.Count()>0 ? imp.FirstOrDefault().NumeroImpegnativa : string.Empty;
+                item.DataImpegnativa = imp.Count() > 0 ? imp.FirstOrDefault().DataImpegnativa : DateTime.MinValue;
+                _logger.LogInformation($"EliosQueueItem da inviare: Codice: {item.Codice}, IdAccettazione: {item.IdAccettazione}, DataAccettazione: {item.DataAccettazione}, IdPaziente: {item.IdPaziente}, Cognome: {item.Cognome}, Nome: {item.Nome}, DataNascita: {item.DataNascita}, CodiceFiscale: {item.CodiceFiscale}, CodiceEsame: {item.CodiceEsame}, DescrizioneEsame: {item.DescrizioneEsame}, DataInserimento: {item.DataInserimento}, StatoInvio: {item.StatoInvio}, DataInvio: {item.DataInvio}, NoteErrore: {item.NoteErrore}, StatoPacs: {item.StatoPacs}, DataUltAggPacs: {item.DataUltAggPacs}, ErrorePacs: {item.ErrorePacs}");
+            }
+
             return dbContext.EliosQueue.Where(qi=> qi.StatoInvio.ToUpper() == STATUS_DA_INVIARE).ToList();
         }
 

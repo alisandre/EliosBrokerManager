@@ -9,6 +9,7 @@ namespace EliosBrokerManager.DBContext
     public class JibriaDBContext: DbContext
     {
         public DbSet<EliosQueueItem> EliosQueue { get; set; }
+        public DbSet<Impegnativa> Impegnative { get; set; }
 
         protected readonly IConfiguration _config;
 

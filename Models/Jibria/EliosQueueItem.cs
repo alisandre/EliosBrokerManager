@@ -73,5 +73,11 @@ namespace EliosBrokerManager.Models.Jibria
         [MaxLength(255)]
         [Column("ERRORE_PACS")]
         public string? ErrorePacs { get; set; }
+
+        [NotMapped]
+        public string NumeroImpegnativa { get; set; } = string.Empty;
+
+        [NotMapped]
+        public DateTime DataImpegnativa { get; set; } = DateTime.UtcNow;
     }
 }

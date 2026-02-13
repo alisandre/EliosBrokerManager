@@ -114,6 +114,9 @@ namespace EliosBrokerManager.Providers
                 acc.DataAcc = eliosQueueItem.DataAccettazione;
                 acc.EsternoStato = 10; //-->acc.EliosStato = 20; // Stato "Inviato"
                 acc.EsternoStatoData = DateTime.Now;
+                acc.DataImp = eliosQueueItem.DataImpegnativa;
+                acc.NumImp1 = eliosQueueItem.NumeroImpegnativa;
+                acc.NumImp2 = string.Empty;
 
                 if (!accettazioneExists) dbContext.Accettazione.Add(acc);
 
