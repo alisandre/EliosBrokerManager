@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>EliosBrokerManager</id>
+    <version>1.0.0</version>
+    <authors>EliosBrokerManager</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="36e92e027f931c904766eff5966deef653ffc5d3" />
+    <dependencies>
+      <group targetFramework="net9.0-windows7.0">
+        <dependency id="EntityFramework" version="6.5.1" exclude="Build,Analyzers" />
+        <dependency id="EntityFramework.Firebird" version="7.10.1" exclude="Build,Analyzers" />
+        <dependency id="EntityFramework.it" version="6.2.0" exclude="Build,Analyzers" />
+        <dependency id="FirebirdSql.Data.FirebirdClient" version="10.3.3" exclude="Build,Analyzers" />
+        <dependency id="FirebirdSql.EntityFrameworkCore.Firebird" version="12.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting" version="10.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.WindowsServices" version="10.0.0" exclude="Build,Analyzers" />
+        <dependency id="MySql.Data" version="9.5.0" exclude="Build,Analyzers" />
+        <dependency id="MySql.EntityFrameworkCore" version="9.0.9" exclude="Build,Analyzers" />
+        <dependency id="Pomelo.EntityFrameworkCore.MySql" version="9.0.0" exclude="Build,Analyzers" />
+        <dependency id="Serilog" version="4.3.0" exclude="Build,Analyzers" />
+        <dependency id="Serilog.Extensions.Hosting" version="10.0.0" exclude="Build,Analyzers" />
+        <dependency id="Serilog.Extensions.Logging" version="10.0.0" exclude="Build,Analyzers" />
+        <dependency id="Serilog.Settings.Configuration" version="10.0.0" exclude="Build,Analyzers" />
+        <dependency id="Serilog.Sinks.Console" version="6.1.1" exclude="Build,Analyzers" />
+        <dependency id="Serilog.Sinks.EventLog" version="4.0.0" exclude="Build,Analyzers" />
+        <dependency id="Serilog.Sinks.File" version="7.0.0" exclude="Build,Analyzers" />
+        <dependency id="System.Buffers" version="4.6.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkReferences>
+      <group targetFramework="net9.0-windows7.0">
+        <frameworkReference name="Microsoft.WindowsDesktop.App.WindowsForms" />
+      </group>
+    </frameworkReferences>
+  </metadata>
+  <files>
+    <file src="E:\Alessandra\Progetti\EliosBrokerManager\bin\Debug\net9.0-windows\EliosBrokerManager.runtimeconfig.json" target="lib\net9.0-windows7.0\EliosBrokerManager.runtimeconfig.json" />
+    <file src="E:\Alessandra\Progetti\EliosBrokerManager\bin\Debug\net9.0-windows\EliosBrokerManager.dll" target="lib\net9.0-windows7.0\EliosBrokerManager.dll" />
+  </files>
+</package>

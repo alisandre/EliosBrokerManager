@@ -19,7 +19,7 @@ namespace EliosBrokerManager.Models.Jibria
         [Column("NUMERORIC")]
         public string NumeroImpegnativa { get; set; } = null!;
 
-        [Column("DATAACC")]
+        [Column("DATACCE")]
         public DateTime DataImpegnativa { get; set; } = DateTime.UtcNow;
     }
 }

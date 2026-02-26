@@ -9,17 +9,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace EliosBrokerManager.Providers
 {
     public class EliosBrokerProvider
     {
-        private readonly ILogger<QueueWorker> _logger;        
+        private readonly ILogger<QueueWorker> _logger;
         private readonly IConfiguration _configuration;
         private EliosDBContext dbContext;
 
-        public EliosBrokerProvider (ILogger<QueueWorker> logger, IConfiguration config)
+        public EliosBrokerProvider(ILogger<QueueWorker> logger, IConfiguration config)
         {
             _logger = logger;
             _configuration = config;
@@ -35,7 +37,7 @@ namespace EliosBrokerManager.Providers
             {
                 // Controllo se il paziente esiste già
 
-                bool patientExists = dbContext.Paziente.Any(p => p.CodFisc !=null &&  p.CodFisc == eliosQueueItem.CodiceFiscale);
+                bool patientExists = dbContext.Paziente.Any(p => p.CodFisc != null && p.CodFisc == eliosQueueItem.CodiceFiscale);
 
                 Paziente paz;
 
@@ -71,7 +73,7 @@ namespace EliosBrokerManager.Providers
 
                 TabEsame esame;
 
-                if (esameExists) 
+                if (esameExists)
                 {
                     esame = dbContext.TabEsame.FirstOrDefault(a => a.IdEsameEsterno == eliosQueueItem.CodiceEsame);
                 }
@@ -115,8 +117,19 @@ namespace EliosBrokerManager.Providers
                 acc.EsternoStato = 10; //-->acc.EliosStato = 20; // Stato "Inviato"
                 acc.EsternoStatoData = DateTime.Now;
                 acc.DataImp = eliosQueueItem.DataImpegnativa;
-                acc.NumImp1 = eliosQueueItem.NumeroImpegnativa;
-                acc.NumImp2 = string.Empty;
+
+                var imp1 = "XXXXX";
+                var imp2 = "XXXXXXXXXX"; 
+
+                if (!string.IsNullOrEmpty(eliosQueueItem.NumeroImpegnativa) && eliosQueueItem.NumeroImpegnativa.Length == 15)
+                {
+                    imp1 = eliosQueueItem.NumeroImpegnativa.Substring(0, 5);
+                    imp2 = eliosQueueItem.NumeroImpegnativa.Substring(5, 10);
+                }
+
+                acc.NumImp1 = imp1;
+                acc.NumImp2 = imp2;
+                acc.CodPriorita = 'Z';
 
                 if (!accettazioneExists) dbContext.Accettazione.Add(acc);
 
@@ -147,7 +160,7 @@ namespace EliosBrokerManager.Providers
                 accDett.EsternoStato = 70; //-->acc.EliosStato = 80; // Stato "Inviato"             
                 accDett.DataPrenotazione = eliosQueueItem.DataAccettazione;
                 accDett.EsternoStatoData = DateTime.Now;
-                accDett.FlgInvioPortale = 0;    
+                accDett.FlgInvioPortale = 0;
 
                 if (!accettazioneDettExists) dbContext.AccettazioneDett.Add(accDett);
 
@@ -160,6 +173,16 @@ namespace EliosBrokerManager.Providers
                 {
                     throw new Exception("IdPazienteBroker non generato correttamente");
                 }
+
+                var jsonOptions = new JsonSerializerOptions
+                {
+                    ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                    WriteIndented = false
+                };
+
+                _logger.LogDebug("Paziente: {Paz}", JsonSerializer.Serialize(paz, jsonOptions));
+                _logger.LogDebug("Accettazione: {Acc}", JsonSerializer.Serialize(acc, jsonOptions));
+                _logger.LogDebug("AccettazioneDett: {AccDett}", JsonSerializer.Serialize(accDett, jsonOptions));
 
                 dbContext.Database.CommitTransaction();
 
@@ -209,7 +232,7 @@ namespace EliosBrokerManager.Providers
                         EliosQueueItem item = new EliosQueueItem
                         {
                             Codice = 0,
-                            IdAccettazione = acc.IdAccEsterno,                            
+                            IdAccettazione = acc.IdAccEsterno,
                             StatoPacs = accDett.EliosStato.ToString(),
                             DataUltAggPacs = accDett.EliosStatoData,
                             ErrorePacs = accDett.EliosNote
@@ -238,7 +261,7 @@ namespace EliosBrokerManager.Providers
             dbContext.Database.BeginTransaction();
 
             try
-            {               
+            {
                 // Controllo se l'esame esiste
 
                 bool esameExists = dbContext.TabEsame.Any(a => a.IdEsameEsterno == eliosQueueItem.CodiceEsame);
@@ -265,8 +288,8 @@ namespace EliosBrokerManager.Providers
                 if (!accettazioneDettExists) throw new Exception("Dettaglio accettazione non trovato");
 
                 AccettazioneDett accDett = dbContext.AccettazioneDett.FirstOrDefault(ad => ad.IdEsameBroker == esame.IdEsameBroker && ad.IdAccBroker == acc.IdAccBroker);
-          
-                accDett.EsternoStato = 120;       
+
+                accDett.EsternoStato = 120;
                 accDett.EsternoStatoData = DateTime.Now;
 
                 dbContext.SaveChanges();
@@ -284,6 +307,6 @@ namespace EliosBrokerManager.Providers
             }
 
         }
-    
+
     }
 }
