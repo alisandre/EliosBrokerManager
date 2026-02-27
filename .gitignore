@@ -1,2 +1,9 @@
 .vs/
 bin/
+/.vs
+/obj
+/.vs
+/bin
+*.user
+/obj
+/Properties/PublishProfiles

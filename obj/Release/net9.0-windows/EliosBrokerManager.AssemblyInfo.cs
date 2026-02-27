@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EliosBrokerManager")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36e92e027f931c904766eff5966deef653ffc5d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35d7b920e83dfadb040cebc9084b0880eb74bfc1")]
 [assembly: System.Reflection.AssemblyProductAttribute("EliosBrokerManager")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EliosBrokerManager")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

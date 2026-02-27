@@ -119,17 +119,23 @@ namespace EliosBrokerManager.Providers
                 acc.DataImp = eliosQueueItem.DataImpegnativa;
 
                 var imp1 = "XXXXX";
-                var imp2 = "XXXXXXXXXX"; 
+                var imp2 = "XXXXXXXXXX";
 
-                if (!string.IsNullOrEmpty(eliosQueueItem.NumeroImpegnativa) && eliosQueueItem.NumeroImpegnativa.Length == 15)
+                //fill with X at the end if length is less than 15, otherwise split in 2 parts the string of 15 characters
+
+                var imp = eliosQueueItem.NumeroImpegnativa;
+                if (imp.Length < 15)
                 {
-                    imp1 = eliosQueueItem.NumeroImpegnativa.Substring(0, 5);
-                    imp2 = eliosQueueItem.NumeroImpegnativa.Substring(5, 10);
+                    imp = imp.PadRight(15, 'X');
                 }
+
+                imp1 = imp.Substring(0, 5);
+                imp2 = imp.Substring(5, 10); 
 
                 acc.NumImp1 = imp1;
                 acc.NumImp2 = imp2;
                 acc.CodPriorita = 'Z';
+                acc.Pagato = 1;
 
                 if (!accettazioneExists) dbContext.Accettazione.Add(acc);
 

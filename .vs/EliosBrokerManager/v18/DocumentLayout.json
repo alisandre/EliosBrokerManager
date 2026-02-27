@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\",
+  "WorkspaceRootPath": "C:\\Repositories\\EliosBrokerManager\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|e:\\alessandra\\progetti\\eliosbrokermanager\\models\\jibria\\impegnativa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|solutionrelative:models\\jibria\\impegnativa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|e:\\alessandra\\progetti\\eliosbrokermanager\\services\\queueworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|solutionrelative:services\\queueworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|e:\\alessandra\\progetti\\eliosbrokermanager\\providers\\eliosbrokerprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|c:\\repositories\\eliosbrokermanager\\providers\\eliosbrokerprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|solutionrelative:providers\\eliosbrokerprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|c:\\repositories\\eliosbrokermanager\\models\\jibria\\eliosqueueitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|solutionrelative:models\\jibria\\eliosqueueitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|c:\\repositories\\eliosbrokermanager\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B9965575-FA07-466A-AEED-29AABA38A8A6}|EliosBrokerManager.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,56 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Impegnativa.cs",
-              "DocumentMoniker": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\Models\\Jibria\\Impegnativa.cs",
-              "RelativeDocumentMoniker": "Models\\Jibria\\Impegnativa.cs",
-              "ToolTip": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\Models\\Jibria\\Impegnativa.cs",
-              "RelativeToolTip": "Models\\Jibria\\Impegnativa.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAVAAAAAAAAAA==",
+              "Title": "EliosBrokerProvider.cs",
+              "DocumentMoniker": "C:\\Repositories\\EliosBrokerManager\\Providers\\EliosBrokerProvider.cs",
+              "RelativeDocumentMoniker": "Providers\\EliosBrokerProvider.cs",
+              "ToolTip": "C:\\Repositories\\EliosBrokerManager\\Providers\\EliosBrokerProvider.cs",
+              "RelativeToolTip": "Providers\\EliosBrokerProvider.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAD4v4UAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T16:29:31.666Z",
+              "WhenOpened": "2026-02-27T11:00:11.161Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "QueueWorker.cs",
-              "DocumentMoniker": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\Services\\QueueWorker.cs",
-              "RelativeDocumentMoniker": "Services\\QueueWorker.cs",
-              "ToolTip": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\Services\\QueueWorker.cs",
-              "RelativeToolTip": "Services\\QueueWorker.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAowDAAAABVAAAAAAAAAA==",
+              "Title": "EliosQueueItem.cs",
+              "DocumentMoniker": "C:\\Repositories\\EliosBrokerManager\\Models\\Jibria\\EliosQueueItem.cs",
+              "RelativeDocumentMoniker": "Models\\Jibria\\EliosQueueItem.cs",
+              "ToolTip": "C:\\Repositories\\EliosBrokerManager\\Models\\Jibria\\EliosQueueItem.cs",
+              "RelativeToolTip": "Models\\Jibria\\EliosQueueItem.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAASwDgAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T16:28:07.147Z",
+              "WhenOpened": "2026-02-27T10:54:31.615Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "EliosBrokerProvider.cs",
-              "DocumentMoniker": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\Providers\\EliosBrokerProvider.cs",
-              "RelativeDocumentMoniker": "Providers\\EliosBrokerProvider.cs",
-              "ToolTip": "E:\\Alessandra\\Progetti\\EliosBrokerManager\\Providers\\EliosBrokerProvider.cs",
-              "RelativeToolTip": "Providers\\EliosBrokerProvider.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Repositories\\EliosBrokerManager\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Repositories\\EliosBrokerManager\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-26T16:28:01.364Z",
+              "WhenOpened": "2026-02-27T10:54:23.423Z",
               "EditorCaption": ""
             }
           ]
